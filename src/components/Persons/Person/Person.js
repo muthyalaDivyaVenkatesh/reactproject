@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import classes from './Person.css';
 import Radium from 'radium';
-
+import Aux from '../../../hoc/Aux' 
 
 // Note we have to here the React because React is used to convert write the jsx
-const person = (props) => {
+class Person extends Component {
+    render() {
+        console.log("[person.js] rednereing ")
 
-    return (
-        <div className={classes.Person}>
-            <p onClick={props.click}> Hi i am {props.name} my age is {props.age}</p>
-            <p>{props.children}</p>
-            <input type="text" onChange={props.changed} value={props.name}></input>
-        </div>
+        return (
+            <Aux>
+            <p key="li" onClick={this.props.click}>
+                Hi i am {this.props.name}
+                my age is {this.props.age}</p>
+            <p key="l2">{this.props.children}</p>
+            <input
+                key="l3"
+                type="text"
+                onChange={this.props.changed}
+                value={this.props.name} 
+                />
+                </Aux  >
+        )
 
-    )
+    }
 }
 
 
-export default person;
+
+export default Person;
 
 
 

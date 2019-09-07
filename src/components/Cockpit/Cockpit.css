@@ -1,0 +1,38 @@
+.Cockpit {
+    text-align: center;
+  }
+  
+  .red{
+    color: blue;
+  }
+  
+  .bold {
+    font-weight: bolder;
+  }
+  
+  /* hover is sudo selector it means  it is depending on the some other selector */
+  
+  /*for every button nested inside the app */
+  .Cockpit button {
+    border: 1px solid blue;
+    padding : 16px;
+    background-color: green;
+    font:inherit;
+    color: white;
+    cursor: pointer;
+  }
+  
+  
+  .Cockpit button:hover {
+    background-color: aquamarine;
+    color: black
+  }
+  
+  .Cockpit button.Red {
+    background-color: red;
+  }
+  
+  .Cockpit button.Red:hover {
+    background-color: violet;
+    color: black
+  }

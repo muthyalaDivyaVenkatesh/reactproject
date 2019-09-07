@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import Person from '../components/Persons/Person/Person';
-// import classes from App.css
-import  classes from './App.css';
-// import Radium, { StyleRoot } from 'radium';
-
+import Persons from '../components/Persons/Persons';
+import classes from './App.css';
+import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    // this.state = is same as state  
+  }
+  // state 
   state = {
 
     persons: [
@@ -17,10 +22,36 @@ class App extends Component {
     showPersons: false
   }
 
+  // run get derived from props
+  static getDerivedFromProps(props,state) {
+    // it is used very rare  here we update the state with props
+    console.log(' [app.js]getDerivedFrom props', props);
+    return state;
+  }
+
+  // componentWillMount() {
+  //   console.log('it is used to intial the state')
+  // }
+
+ // These will run afte render these is something which we use to get by https call 
+  componentDidMount ()  {
+    console.log('[APP.JS] Component did mount')
+  } 
+
+shouldComponentUpdate(nextProps, nextState) {
+  console.log("[APP.JS] should componentUpdate")
+  return true 
+}
+ 
+// component Did Update 
+componentDidUpdate() {
+  console.log("[App.js] component did update");
+
+}
+
   // this is es7 way of writting methods
   deletePersonHandler = (personIndex) => {
-    // we can copy by these method
-    // const persons  = this.state.persons.slice();
+
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons })
@@ -42,7 +73,7 @@ class App extends Component {
     const persons = [... this.state.persons];
 
     persons[personIndex] = person;
-    // console.log("you have succesfully clicked")
+
     this.setState({
       persons: persons
     });
@@ -56,59 +87,38 @@ class App extends Component {
   }
 
   render() {
-
+    // these is the check for the render method
+    console.log("App.js rednder method")
     let persons = null;
     let btnClass = '';
 
     if (this.state.showPersons) {
-      persons = (
+      persons =
         <div>
-          {this.state.persons.map((person, index) => {
-            console.log(person)
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangeHandler(event, person.id)}
-            />
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangeHandler}
+          />
+
 
         </div>
-      );
-      // style[':hover'] = {
-      //   backgroundColor : 'violet ',
-      //   color:'black'
-      // }
-      btnClass=classes.Red
+
+
+
     }
 
-
-    // create a class of array  
-    // let classes = ['red', 'bold'].join(' ')
-
-    const assignClasses = [];
-    // first check whether the length is  gerater than 2 
-    if (this.state.persons.length <= 2) {
-      assignClasses.push(classes.red ) // classes = [red]
-    }
-    if (this.state.persons.length <= 1) {
-      assignClasses.push(classes.bold) // classes = [red,bold]
-    }
-
-    // here return parentesses is used to group everything 
     return (
-      // styleRoot is used when we are using media queries we have to wrap 
-      // your entire app  inside styleoot 
-      // <StyleRoot>
-      <div className={classes.App}>
-        <h1>Hi, i am react App</h1>
-        <p className={assignClasses.join(' ')}>These is relly working</p>
-        <button
-          onClick={this.togglePersonHandler}
-        >Toogle persons </button>
+      <WithClass classes={classes.App}>
+
+        <Cockpit 
+        showPersons={this.state.showPersons}
+          personsLength={this.state.persons.length}
+          clicked={this.togglePersonHandler}
+          title={this.props.appTitle}
+        />
         {persons}
-      </div>
+      </WithClass>
     );
   }
 
@@ -118,5 +128,3 @@ class App extends Component {
 
 export default App
 
-// this Rdium making your component as higher order function 
-// export default Radium(App);
