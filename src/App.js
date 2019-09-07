@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-import './App.css';
+// import classes from App.css
+import  classes from './App.css';
 // import Radium, { StyleRoot } from 'radium';
 
 
@@ -56,18 +57,6 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      // ':hover': {
-      //   backgroundColor:'lightgreen',
-      //   color:'black'
-      // }
-    };
-
     let persons = null;
     if (this.state.showPersons) {
       persons = (
@@ -84,8 +73,6 @@ class App extends Component {
           })}
         </div>
       );
-
-      style.backgroundColor = 'red';
       // style[':hover'] = {
       //   backgroundColor : 'violet ',
       //   color:'black'
@@ -96,13 +83,13 @@ class App extends Component {
     // create a class of array  
     // let classes = ['red', 'bold'].join(' ')
 
-    const classes = [];
+    const assignClasses = [];
     // first check whether the length is  gerater than 2 
     if (this.state.persons.length <= 2) {
-      classes.push('red') // classes = [red]
+      assignClasses.push(classes.red ) // classes = [red]
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold') // classes = [red,bold]
+      assignClasses.push(classes.bold) // classes = [red,bold]
     }
 
     // here return parentesses is used to group everything 
@@ -110,11 +97,10 @@ class App extends Component {
       // styleRoot is used when we are using media queries we have to wrap 
       // your entire app  inside styleoot 
       // <StyleRoot>
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, i am react App</h1>
-        <p className={classes.join(' ')}>These is relly working</p>
+        <p className={assignClasses.join(' ')}>These is relly working</p>
         <button
-          style={style}
           onClick={this.togglePersonHandler}
         >Toogle persons </button>
         {persons}
