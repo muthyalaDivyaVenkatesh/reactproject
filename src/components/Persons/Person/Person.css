@@ -9,9 +9,11 @@
 
 
 /* we are using media width  */
-/* 
-@media (min-width: 500px) {
+ 
+ @media (min-width: 500px) {
   .person{
     width : 450px
   }
-} */
+} 
+
+

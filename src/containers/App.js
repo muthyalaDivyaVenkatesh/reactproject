@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 // import classes from App.css
 import  classes from './App.css';
 // import Radium, { StyleRoot } from 'radium';
@@ -58,6 +58,8 @@ class App extends Component {
   render() {
 
     let persons = null;
+    let btnClass = '';
+
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -71,12 +73,14 @@ class App extends Component {
               changed={(event) => this.nameChangeHandler(event, person.id)}
             />
           })}
+
         </div>
       );
       // style[':hover'] = {
       //   backgroundColor : 'violet ',
       //   color:'black'
       // }
+      btnClass=classes.Red
     }
 
 
