@@ -1,3 +1,14 @@
 .App {
   text-align: center;
 }
+
+.red{
+  color: blue;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+/* hover is sudo selector it means it is depending on the some other selector */
+
