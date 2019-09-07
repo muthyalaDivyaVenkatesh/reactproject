@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons';
 import classes from './App.css';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass'
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux'
 
-class App extends Component {
+ class App extends Component {
   constructor(props) {
     super(props);
     console.log('[App.js] constructor');
@@ -109,7 +110,7 @@ componentDidUpdate() {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <Aux>
 
         <Cockpit 
         showPersons={this.state.showPersons}
@@ -118,7 +119,7 @@ componentDidUpdate() {
           title={this.props.appTitle}
         />
         {persons}
-      </WithClass>
+      </Aux>
     );
   }
 
@@ -126,5 +127,5 @@ componentDidUpdate() {
 
 }
 
-export default App
+export default  withClass(App,classes.App)
 
