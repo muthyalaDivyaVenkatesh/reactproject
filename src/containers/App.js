@@ -20,7 +20,8 @@ import Aux from '../hoc/Aux'
       { 'id': '33', name: "neha", age: 23 }
     ],
     otherState: "THis is a other state",
-    showPersons: false
+    showPersons: false,
+    changeCounter:0
   }
 
   // run get derived from props
@@ -74,11 +75,17 @@ componentDidUpdate() {
     const persons = [... this.state.persons];
 
     persons[personIndex] = person;
-
-    this.setState({
-      persons: persons
-    });
+    
+    // Now we can use setState here 
+    this.setState((prevState, props )=>{
+      return{
+        persons: persons,
+        changeCounter: prevState.changeCounter +1
+      }
+    })
   }
+
+  
 
   // writting a method 
 
